@@ -4,47 +4,69 @@ from tkinter.messagebox import showinfo
 import time
 import webbrowser
 
-#timerLabel = Label(root, text="Timer started.")
+#Library
+list3min = ["Pinterest, 3 minutes",
+            "YouTube, 3 minutes",
+            "Watch 1 cat video, 3 minutes",
+            "Lay down, 3 minutes",
+            "Sit on the sofa, 3 minutes"]
 
-def generate():
-    dict1 = {
-            "Pinterest, 5 minutes":5,
-            "Pinterest, 3 minutes":3,
-            "YouTube, 5 minutes":5,
-            "YouTube, 3 minutes":3,
-            "Watch 1 cat video, 3 minutes":3}
+list5min = ["Pinterest, 5 minutes",
+            "YouTube, 5 minutes",
+            "Lay down, 5 minutes"]
+
+list10min = ["Work on a drawing, 10 minutes",
+             "Read a book, 10 minutes",
+             "Work on a drawing, 10 minutes",
+             "Watch an art tutorial, 10 minutes",
+             "Work on a knitting project, 10 minutes"]
+
+list20min = ["Work on a drawing, 20 minutes",
+             "Read a book, 20 minutes",
+             "Work on a drawing, 20 minutes",
+             "Watch an art tutorial, 20 minutes",
+             "Work on a knitting project, 20 minutes",
+             "Work on a story, 20 minutes"]
+
+#Functions
+
+def timer1():
+    generate(list3min)
+    breakTimer("3")
+
+def timer2():
+    generate(list5min)
+    breakTimer("5")
+
+def timer3():
+    generate(list10min)
+    breakTimer("10")
+
+def timer4():
+    generate(list20min)
+    breakTimer("20")
     
-    dict2 = {
-            "Lay down, 5 minutes":5,
-            "Lay down, 3 minutes":3,
-            "Put your head down, 3 minutes":3,
-            "Sit on the sofa, 5 minutes":5,
-            "Sit on the sofa, 3 minutes":3,
-            "Make a drink, unlimited":None,
-            "Close your eyes and reflect on your emotions, unlimited":None}
-    
-    dict3 = {
-            "Work on a drawing, 20 minutes":20,
-            "Work on a story, 20 minutes":20,
-            "Doodle in your sketchbook, 7 minutes":7,
-            "Work on a knitting project, 30 minutes":30,
-            "Watch an art tutorial, 10 minutes":10}
-    
-    dictPick = random.choice([dict1, dict2, dict3])
-    itemPick = random.choice(list(dictPick))
+def generate(lst):
+    itemPick = random.choice(lst)
     showinfo(title="Break", message="You picked: {}".format(itemPick))
-    breakTimer(dictPick.get(itemPick))
 
 def breakTimer(minutes):
+    "Opens up a browser window with a timer according to amount of minutes passed in"
     url = "https://www.google.com/search?client=safari&rls=en&q={}+minute+timer&ie=UTF-8&oe=UTF-8".format(minutes)
     webbrowser.open_new(url)
              
 root = Tk()
 
 label = Label(root, text="Take a break!")
-button = Button(root, text="Generate", command=generate)
+button1 = Button(root, text="3 minutes", command=timer1)
+button2 = Button(root, text="5 minutes", command=timer2)
+button3 = Button(root, text="10 minutes", command=timer3)
+button4 = Button(root, text="20 minutes", command=timer4)
 
 label.pack()
-button.pack()
+button1.pack()
+button2.pack()
+button3.pack()
+button4.pack()
 
 root.mainloop()
